@@ -4,13 +4,19 @@ import axios from 'axios';
 
 import { Noto_Sans_KR } from 'next/font/google';
 import { json } from 'stream/consumers';
-import { date } from 'random-js';
 
 // If loading a variable font, you don't need to specify the font weight
 const noto_sans = Noto_Sans_KR({
     subsets: ['latin'],
     display: 'swap',
     weight: '500',
+});
+
+// If loading a variable font, you don't need to specify the font weight
+const noto_sans_bold = Noto_Sans_KR({
+    subsets: ['latin'],
+    display: 'swap',
+    weight: '700',
 });
 
 const today = new Date();
@@ -22,13 +28,12 @@ export default function Home() {
             const response = await axios.get(url);
             const data = response.data;
             const lunch = data.menu[0].lunch.map((item: string) => item.replace(/^j/, ''));
-            console.log(lunch);
             return lunch;
         } catch (error) {
             return error;
         }
     }
-    fetchData();
+    const lunchmenu = fetchData();
     return (
         <div>
             <img className='main-logo' src='/icon.svg' width='50vw' />
@@ -40,9 +45,14 @@ export default function Home() {
                         </span>
                     </div>
                     <div className='lunch'>
-                        <span className={`lunch-text ${noto_sans.className}`}>
-                            <></>
-                        </span>
+                        {lunchmenu.then((menu: string[]) =>
+                            menu.map((item: string, index: number) => (
+                                <span className={`lunch-text ${noto_sans_bold.className}`}>
+                                    {index + 1}. {item}
+                                    <br></br>
+                                </span>
+                            ))
+                        )}
                     </div>
                 </div>
             </div>
