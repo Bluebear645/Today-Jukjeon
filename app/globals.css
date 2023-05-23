@@ -45,7 +45,7 @@
 
 .main-border {
     position: absolute;
-    width: 60vw;
+    width: 70vw;
     height: 62vh;
     margin: 22px 0 0;
     padding: 52px 32px 29px;
@@ -83,7 +83,9 @@
 
 .date-text {
     font-size: 23px;
-    margin-top: 10%;
+}
+
+.lunch {
 }
 
 .lunch-text {
@@ -92,4 +94,64 @@
     letter-spacing: -1px;
     display: block;
     white-space: nowrap;
+}
+
+.kcal-text {
+    font-size: 15px;
+    text-align: center;
+    letter-spacing: -1px;
+    display: block;
+    white-space: nowrap;
+    margin-top: 30px;
+}
+
+.img-icon {
+    box-sizing: border-box;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 20px;
+    height: 16px;
+    overflow: hidden;
+    box-shadow: 0 0 0 2px;
+    border-radius: 2px;
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.img-icon::after,
+.img-icon::before {
+    content: '';
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    border: 2px solid;
+}
+.img-icon::after {
+    transform: rotate(45deg);
+    border-radius: 3px;
+    width: 16px;
+    height: 16px;
+    top: 9px;
+    left: 6px;
+}
+.img-icon::before {
+    width: 6px;
+    height: 6px;
+    border-radius: 100%;
+    top: 2px;
+    left: 2px;
+}
+
+.img-text {
+    display: block;
+    text-align: center;
+    font-size: 13px;
+    margin-top: 0;
+    white-space: nowrap;
+    position: absolute;
+    bottom: 42px;
+    left: 50%;
+    transform: translateX(-50%);
 }
