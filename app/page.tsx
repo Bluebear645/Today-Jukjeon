@@ -22,6 +22,9 @@ const noto_sans_light = Noto_Sans_KR({
 });
 
 const today = new Date();
+const year = today.getFullYear();
+const month = today.getMonth() + 1;
+const day = today.getDate();
 
 export default function Home() {
     return (
@@ -55,21 +58,25 @@ export default function Home() {
 }
 
 export async function fetchData() {
-    const url = `https://school-api.xyz/api/high/J100000801?date=${today.getDate()}&allergy=hidden`;
-    try {
-        const response = await axios.get(url);
-        const data = response.data;
-        const lunch = data.menu[0].lunch.map((item: string) => item.replace(/^j/, ''));
-        return lunch;
-    } catch (error) {
-        return error;
-    }
+    const YMD = `${year}${month < 10 ? '0' + month : month}${day < 10 ? '0' + day : day}`;
+    const res = await fetch(
+        `https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=c814eb81cdef46fda17b8aa5c0b04d97&TYPE=json&ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7530525&MLSV_YMD=${YMD}`
+    );
+    const data = await res.json();
+    const list = data.mealServiceDietInfo[1].row[0].DDISH_NM;
+    return list.split('<br/>').map((item: string) =>
+        item
+            .replace(/^j/, '')
+            .replace(/\(.*?\)/g, '')
+            .trim()
+    );
 }
 const lunchmenu = fetchData();
 
 export async function fetchKcal() {
+    const YMD = `${year}${month < 10 ? '0' + month : month}${day < 10 ? '0' + day : day}`;
     const res = await fetch(
-        `https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=c814eb81cdef46fda17b8aa5c0b04d97&TYPE=json&ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7530525&MLSV_YMD=20230523`
+        `https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=c814eb81cdef46fda17b8aa5c0b04d97&TYPE=json&ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7530525&MLSV_YMD=${YMD}`
     );
     const data = await res.json();
     return data.mealServiceDietInfo[1].row[0].CAL_INFO;
