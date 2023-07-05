@@ -57,7 +57,7 @@ export default function Home() {
     );
 }
 
-export async function fetchData() {
+async function fetchData() {
     const YMD = `${year}${month < 10 ? '0' + month : month}${day < 10 ? '0' + day : day}`;
     const res = await fetch(
         `https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=c814eb81cdef46fda17b8aa5c0b04d97&TYPE=json&ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7530525&MLSV_YMD=${YMD}`
@@ -73,7 +73,7 @@ export async function fetchData() {
 }
 const lunchmenu = fetchData();
 
-export async function fetchKcal() {
+async function fetchKcal() {
     const YMD = `${year}${month < 10 ? '0' + month : month}${day < 10 ? '0' + day : day}`;
     const res = await fetch(
         `https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=c814eb81cdef46fda17b8aa5c0b04d97&TYPE=json&ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7530525&MLSV_YMD=${YMD}`
