@@ -2,6 +2,7 @@ import Image from 'next/image';
 import styles from './page.module.css';
 import axios from 'axios';
 import xml2js from 'xml2js';
+const fs = require('fs');
 
 import { Noto_Sans_KR } from 'next/font/google';
 import { json } from 'stream/consumers';
@@ -21,6 +22,7 @@ const noto_sans_light = Noto_Sans_KR({
     weight: '400',
 });
 
+//날짜 정의
 const today = new Date();
 const year = today.getFullYear();
 const month = today.getMonth() + 1;
@@ -49,14 +51,20 @@ export default function Home() {
                         <span className={`kcal-text ${noto_sans_light.className}`}>{fetchKcal()}</span>
                     </div>
                 </div>
-                <div className='img-icon'></div>
-                <span className={`img-text ${noto_sans_light.className}`}>사진</span>
+                {/* <div className='img-icon'></div>
+                <span className={`img-text ${noto_sans_light.className}`}>사진</span> */}
             </div>
             {/* <div className='card'></div> */}
         </div>
     );
 }
 
+async function LoadData(type: string) {}
+const databuffer = fs.readFileSync('db.json');
+const dataJSON = databuffer.toString();
+const data = JSON.parse(dataJSON);
+if (data.updatedAt === today.getDate()) {
+}
 async function fetchData() {
     const YMD = `${year}${month < 10 ? '0' + month : month}${day < 10 ? '0' + day : day}`;
     const res = await fetch(
