@@ -122,7 +122,7 @@
 
 .img-icon::after,
 .img-icon::before {
-    content: '';
+    content: 'alert.svg';
     display: block;
     box-sizing: border-box;
     position: absolute;
