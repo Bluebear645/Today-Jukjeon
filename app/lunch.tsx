@@ -33,15 +33,20 @@ function Lunch() {
                 `https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=c814eb81cdef46fda17b8aa5c0b04d97&TYPE=json&ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7530525&MLSV_YMD=${YMD}`
             );
             const data = await res.json();
-            const list = data.mealServiceDietInfo[1].row[0].DDISH_NM;
-            const menu = list.split('<br/>').map((item: string) =>
-                item
-                    .replace(/^j/, '')
-                    .replace(/\(.*?\)/g, '')
-                    .trim()
-            );
-            setLunchmenu(menu);
-            setKcal(data.mealServiceDietInfo[1].row[0].CAL_INFO);
+            if (data.RESULT && data.RESULT.CODE === 'INFO-200') {
+                setLunchmenu(['정보가 없습니다']);
+                setKcal('');
+            } else {
+                const list = data.mealServiceDietInfo[1].row[0].DDISH_NM;
+                const menu = list.split('<br/>').map((item: string) =>
+                    item
+                        .replace(/^j/, '')
+                        .replace(/\(.*?\)/g, '')
+                        .trim()
+                );
+                setLunchmenu(menu);
+                setKcal(data.mealServiceDietInfo[1].row[0].CAL_INFO);
+            }
         }
         fetchData();
     }, []);

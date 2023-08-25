@@ -31,8 +31,11 @@ export default function Home() {
             <img className='main-logo' src='/icon.svg' width='50vw' />
             <div className='main-border'>
                 <Lunch />
-                <div className='img-icon'></div>
-                <span className={`img-text ${noto_sans_light.className}`}>알림 받기</span>
+                <div className='alert'>
+                    <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200' />
+                    <span className='material-symbols-outlined'>notifications_active</span>
+                    <span className={`alert-text ${noto_sans_light.className}`}>알림 받기</span>
+                </div>
             </div>
             {/* <div className='card'></div> */}
         </div>
