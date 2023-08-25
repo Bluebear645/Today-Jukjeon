@@ -32,7 +32,7 @@ export default function Home() {
             <div className='main-border'>
                 <Lunch />
                 <div className='img-icon'></div>
-                <span className={`img-text ${noto_sans_light.className}`}>알림 받기</span> */}
+                <span className={`img-text ${noto_sans_light.className}`}>알림 받기</span>
             </div>
             {/* <div className='card'></div> */}
         </div>
