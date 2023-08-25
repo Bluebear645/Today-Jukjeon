@@ -14,6 +14,7 @@
         "@types/react-dom": "18.2.4",
         "@types/react-swipeable": "^5.2.0",
         "@types/xml2js": "^0.4.11",
+        "@vercel/analytics": "^1.0.2",
         "axios": "^1.4.0",
         "mathjs": "^11.8.2",
         "next": "13.4.8",
