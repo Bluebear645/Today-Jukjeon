@@ -31,7 +31,7 @@ export default function Home() {
             <img className='main-logo' src='/icon.svg' width='50vw' />
             <div className='main-border'>
                 <Lunch />
-                <div className='img-icon' src='/alert.svg'></div>
+                <div className='img-icon'></div>
                 <span className={`img-text ${noto_sans_light.className}`}>알림 받기</span> */}
             </div>
             {/* <div className='card'></div> */}
