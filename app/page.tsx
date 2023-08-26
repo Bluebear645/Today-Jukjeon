@@ -2,7 +2,7 @@ import Image from 'next/image';
 import styles from './page.module.css';
 import axios from 'axios';
 import xml2js from 'xml2js';
-import Lunch from './lunch';
+import MenuList from './MenuList';
 const fs = require('fs');
 
 import { Noto_Sans_KR } from 'next/font/google';
@@ -30,7 +30,9 @@ export default function Home() {
         <div>
             <img className='main-logo' src='/icon.svg' width='50vw' />
             <div className='main-border'>
-                <Lunch />
+                <div className='box'>
+                    <MenuList />
+                </div>
                 <div className='alert'>
                     <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200' />
                     <span className='material-symbols-outlined'>notifications_active</span>

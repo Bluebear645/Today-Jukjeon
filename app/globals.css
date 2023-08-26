@@ -69,7 +69,7 @@
 }
 
 .date {
-    background-color: #fff;
+    margin-top: -5%;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -78,14 +78,18 @@
     height: 50px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .date-text {
+    background-color: #fff;
     font-size: 23px;
+    text-align: center;
+    white-space: nowrap;
 }
 
 .lunch {
+    margin-top: 30px;
 }
 
 .lunch-text {
@@ -126,4 +130,11 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+}
+
+.MenuList {
+    position: absolute;
+    transform: translateY(-90px);
+    background-color: #fff;
+    height: 140%;
 }

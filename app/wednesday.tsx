@@ -17,10 +17,29 @@ const noto_sans_light = Noto_Sans_KR({
 });
 
 //날짜 정의
-const today = new Date();
-const year = today.getFullYear();
-const month = today.getMonth() + 1;
-const day = today.getDate();
+function getSpecificDate(weekday: number): string {
+    const today = new Date();
+    const dayOfWeek = today.getDay();
+    const diff = today.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1) + weekday;
+    const date = new Date(today.setDate(diff));
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${year},${month},${day}`;
+}
+const today = new Date(getSpecificDate(2));
+
+function getWeekdayDate(weekday: number): string {
+    const today = new Date();
+    const dayOfWeek = today.getDay();
+    const diff = today.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1) + weekday;
+    const date = new Date(today.setDate(diff));
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${year}${month}${day}`;
+}
+const YMD = getWeekdayDate(2);
 
 function Lunch() {
     const [lunchmenu, setLunchmenu] = useState<string[]>([]);
@@ -28,7 +47,6 @@ function Lunch() {
 
     useEffect(() => {
         async function fetchData() {
-            const YMD = `${year}${month < 10 ? '0' + month : month}${day < 10 ? '0' + day : day}`;
             const res = await fetch(
                 `https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=c814eb81cdef46fda17b8aa5c0b04d97&TYPE=json&ATPT_OFCDC_SC_CODE=J10&SD_SCHUL_CODE=7530525&MLSV_YMD=${YMD}`
             );
@@ -52,20 +70,20 @@ function Lunch() {
     }, []);
 
     return (
-        <div className='box'>
+        <div>
             <div className='date'>
                 <span className={`date-text ${noto_sans.className}`}>
                     {today.getFullYear()}.{today.getMonth() + 1}.{today.getDate()} {new Intl.DateTimeFormat('ko-KR', { weekday: 'long' }).format(today)}
+                    <div className='lunch'>
+                        {lunchmenu.map((item: string, index: number) => (
+                            <span className={`lunch-text ${noto_sans.className}`}>
+                                {index + 1}. {item}
+                                <br></br>
+                            </span>
+                        ))}
+                        <span className={`kcal-text ${noto_sans_light.className}`}>{kcal}</span>
+                    </div>
                 </span>
-            </div>
-            <div className='lunch'>
-                {lunchmenu.map((item: string, index: number) => (
-                    <span className={`lunch-text ${noto_sans.className}`}>
-                        {index + 1}. {item}
-                        <br></br>
-                    </span>
-                ))}
-                <span className={`kcal-text ${noto_sans_light.className}`}>{kcal}</span>
             </div>
         </div>
     );
