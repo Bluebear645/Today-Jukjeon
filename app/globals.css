@@ -110,8 +110,8 @@
 }
 
 .alert {
+    top: 90%;
     position: absolute;
-    bottom: 60px;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -137,4 +137,25 @@
     transform: translateY(-90px);
     background-color: #fff;
     height: 140%;
+}
+
+.github {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.github-text {
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 0;
+    white-space: nowrap;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 6%;
 }

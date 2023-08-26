@@ -1,13 +1,8 @@
 import Image from 'next/image';
 import styles from './page.module.css';
-import axios from 'axios';
-import xml2js from 'xml2js';
-import MenuList from './MenuList';
-const fs = require('fs');
+import MenuList from './components/MenuList';
 
 import { Noto_Sans_KR } from 'next/font/google';
-import { json } from 'stream/consumers';
-import { exp } from 'mathjs';
 
 // If loading a variable font, you don't need to specify the font weight
 const noto_sans = Noto_Sans_KR({
@@ -39,7 +34,6 @@ export default function Home() {
                     <span className={`alert-text ${noto_sans_light.className}`}>알림 받기</span>
                 </div>
             </div>
-            {/* <div className='card'></div> */}
         </div>
     );
 }
