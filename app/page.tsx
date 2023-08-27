@@ -1,7 +1,9 @@
 import Image from 'next/image';
 import styles from './page.module.css';
 import MenuList from './components/MenuList';
-
+import Notification from './components/notification';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 import { Noto_Sans_KR } from 'next/font/google';
 
 // If loading a variable font, you don't need to specify the font weight
@@ -28,12 +30,9 @@ export default function Home() {
                 <div className='box'>
                     <MenuList />
                 </div>
-                <div className='alert'>
-                    <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200' />
-                    <span className='material-symbols-outlined'>notifications_active</span>
-                    <span className={`alert-text ${noto_sans_light.className}`}>알림 받기</span>
-                </div>
+                <Notification />
             </div>
+            <ToastContainer />
         </div>
     );
 }
