@@ -11,6 +11,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang='en'>
+            <meta name="naver-site-verification" content="e6954e9cc5fc4fd216744d37ecd0bf7e76cb8e48" />
             <body className={inter.className}>
                 {children}
                 {/* <Hamburger /> */}
