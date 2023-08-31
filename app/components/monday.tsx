@@ -21,22 +21,31 @@ const noto_sans_light = Noto_Sans_KR({
 const { DateTime } = require('luxon');
 
 function addDays(n: number): string {
-    const today = DateTime.local();
-    const futureDate = today.plus({ days: n });
-    const isWeekend = futureDate.weekday === 6 || futureDate.weekday === 7;
-    const adjustedDate = isWeekend ? futureDate.plus({ days: 2 }) : futureDate;
-    return adjustedDate.toFormat('yyyyMMdd');
+    let date = DateTime.local();
+    for (let i = 0; i < n; i++) {
+        date = date.plus({ days: 1 });
+        if (date.weekday === 6) {
+            date = date.plus({ days: 2 });
+        } else if (date.weekday === 7) {
+            date = date.plus({ days: 1 });
+        }
+    }
+    return date.toFormat('yyyyMMdd');
 }
 const YMD = addDays(0);
 
 function todayIs(n: number): string {
-    const today = DateTime.local();
-    const futureDate = today.plus({ days: n });
-    const isWeekend = futureDate.weekday === 6 || futureDate.weekday === 7;
-    const adjustedDate = isWeekend ? futureDate.plus({ days: 2 }) : futureDate;
-    return adjustedDate.toFormat('yyyy,MM,dd');
+    let date = DateTime.local();
+    for (let i = 0; i < n; i++) {
+        date = date.plus({ days: 1 });
+        if (date.weekday === 6) {
+            date = date.plus({ days: 2 });
+        } else if (date.weekday === 7) {
+            date = date.plus({ days: 1 });
+        }
+    }
+    return date.toFormat('yyyy,MM,dd');
 }
-
 const today = new Date(todayIs(0));
 
 function Monday() {
