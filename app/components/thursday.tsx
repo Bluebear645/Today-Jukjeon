@@ -16,29 +16,26 @@ const noto_sans_light = Noto_Sans_KR({
     weight: '400',
 });
 
-function getWeekdayDate(weekday: number): string {
-    const today = new Date();
-    const dayOfWeek = today.getDay();
-    const diff = today.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1) + weekday;
-    const date = new Date(today.setDate(diff));
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    return `${year}${month}${day}`;
-}
-const YMD = getWeekdayDate(3);
+const { DateTime } = require('luxon');
 
-function getSpecificDate(weekday: number): string {
-    const today = new Date();
-    const dayOfWeek = today.getDay();
-    const diff = today.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1) + weekday;
-    const date = new Date(today.setDate(diff));
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    return `${year},${month},${day}`;
+function addDays(n: number): string {
+    const today = DateTime.local();
+    const futureDate = today.plus({ days: n });
+    const isWeekend = futureDate.weekday === 6 || futureDate.weekday === 7;
+    const adjustedDate = isWeekend ? futureDate.plus({ days: 2 }) : futureDate;
+    return adjustedDate.toFormat('yyyyMMdd');
 }
-const today = new Date(getSpecificDate(3));
+const YMD = addDays(3);
+
+function todayIs(n: number): string {
+    const today = DateTime.local();
+    const futureDate = today.plus({ days: n });
+    const isWeekend = futureDate.weekday === 6 || futureDate.weekday === 7;
+    const adjustedDate = isWeekend ? futureDate.plus({ days: 2 }) : futureDate;
+    return adjustedDate.toFormat('yyyy,MM,dd');
+}
+
+const today = new Date(todayIs(3));
 
 function Lunch() {
     const [lunchmenu, setLunchmenu] = useState<string[]>([]);
